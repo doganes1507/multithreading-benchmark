@@ -9,7 +9,7 @@ Currently, multithreading-benchmark supports benchmarking tasks such as sorting 
 ## Installation
 To use the current version of multithreading-benchmark, clone the repository to your local machine:
 
-git clone https://github.com/yourusername/multithreading-benchmark.git
+git clone https://github.com/doganes1507/multithreading-benchmark.git
 
 In the future, .exe files may be added to make it easier to download and use the application.
 
