@@ -2,7 +2,7 @@
 * Find all prime numbers in given range
 
 # Usage
-* Add GUI via Windows Forms
+* Add GUI
 
 # Installation
 * Add executable files
