@@ -15,12 +15,25 @@ public static class SortingAlgorithms
     /// <exception cref="ArgumentNullException">Thrown when the list is null.</exception>
     public static void BubbleSort<T>(List<T> list) where T: INumber<T>
     {
+        #region InputValidation
+
         if (list == null)
         {
             throw new ArgumentNullException(nameof(list));
         }
-        
-        throw new NotImplementedException();
+
+        #endregion
+
+        for (var i = 0; i < list.Count - 1; i++)
+        {
+            for (var j = 0; j < list.Count - i - 1; j++)
+            {
+                if (list[j].CompareTo(list[j + 1]) > 0)
+                {
+                    (list[j], list[j + 1]) = (list[j + 1], list[j]);
+                }
+            }
+        }
     }
     
     /// <summary>
@@ -34,12 +47,34 @@ public static class SortingAlgorithms
     /// <exception cref="ArgumentNullException">Thrown when the list is null.</exception>
     public static void ShellSort<T>(List<T> list) where T : INumber<T>
     {
+        #region InputValidation
+
         if (list == null)
         {
             throw new ArgumentNullException(nameof(list));
         }
-        
-        throw new NotImplementedException();
+
+        #endregion
+
+        var interval = list.Count / 2;
+
+        while (interval > 0)
+        {
+            for (var i = interval; i < list.Count; i++)
+            {
+                var temp = list[i];
+                var j = i;
+
+                while (j >= interval && list[j - interval].CompareTo(temp) > 0)
+                {
+                    list[j] = list[j - interval];
+                    j -= interval;
+                }
+
+                list[j] = temp;
+            }
+            interval /= 2;
+        }
     }
 
     /// <summary>
@@ -53,11 +88,42 @@ public static class SortingAlgorithms
     /// <exception cref="ArgumentNullException">Thrown when the list is null.</exception>
     public static void QuickSort<T>(List<T> list) where T : INumber<T>
     {
+        #region InputValidation
+
         if (list == null)
         {
             throw new ArgumentNullException(nameof(list));
         }
+
+        #endregion
+
+        if (list.Count <= 1)
+        {
+            return;
+        }
+
+        var pivot = list[0];
+        var left = new List<T>();
+        var right = new List<T>();
+
+        for (var i = 1; i < list.Count; i++)
+        {
+            if (list[i].CompareTo(pivot) < 0)
+            {
+                left.Add(list[i]);
+            }
+            else
+            {
+                right.Add(list[i]);
+            }
+        }
         
-        throw new NotImplementedException();
+        QuickSort(left);
+        QuickSort(right);
+        
+        list.Clear();
+        list.AddRange(left);
+        list.Add(pivot);
+        list.AddRange(right);
     }
 }
