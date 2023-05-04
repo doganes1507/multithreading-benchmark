@@ -1,4 +1,6 @@
-﻿namespace MultithreadingBenchmark.MatrixRowSorting;
+﻿using System.Diagnostics;
+
+namespace MultithreadingBenchmark.MatrixRowSorting;
 
 public static class Benchmark
 {
@@ -15,8 +17,10 @@ public static class Benchmark
     /// <returns>The elapsed time in milliseconds.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when numberOfThreads is less than 1 or greater than matrixRowCount.</exception>
     /// <exception cref="ArgumentException">Thrown when matrixColumnCount is less than or equal to 0 or when matrixMinValue is greater than matrixMaxValue.</exception>
-    public static int RunSingleTest(int numberOfThreads, int matrixRowCount, int matrixColumnCount, int matrixMinValue, int matrixMaxValue, SortingAlgorithmEnum algorithm)
+    public static long RunSingleTest(int numberOfThreads, int matrixRowCount, int matrixColumnCount, int matrixMinValue, int matrixMaxValue, SortingAlgorithmEnum algorithm)
     {
+        #region ImputValidation
+
         if (numberOfThreads < 1 || numberOfThreads > matrixRowCount)
         {
             throw new ArgumentOutOfRangeException(nameof(numberOfThreads), "The number of threads must be between 1 and the number of matrix rows.");
@@ -31,8 +35,17 @@ public static class Benchmark
         {
             throw new ArgumentException("The minimum value cannot be greater than the maximum value.");
         }
+
+        #endregion
+
+        var stopwatch = new Stopwatch();
+        var matrix = Matrix.GenerateIntegerMatrix(matrixRowCount, matrixColumnCount, matrixMinValue, matrixMaxValue);
+
+        stopwatch.Start();
+        MatrixRowSorting.ParallelSortMatrixRows(matrix, numberOfThreads, algorithm);
+        stopwatch.Stop();
         
-        throw new NotImplementedException();
+        return stopwatch.ElapsedMilliseconds;
     }
 
     /// <summary>
@@ -50,8 +63,10 @@ public static class Benchmark
     /// <exception cref="ArgumentNullException">Thrown when the list of thread numbers is null.</exception>
     ///  <exception cref="ArgumentException">Thrown when the list of thread numbers is empty or when the matrix column count is not positive or when the minimum value is greater than the maximum value.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when any of the numbers of threads is less than 1 or greater than the number of matrix rows.</exception>
-    public static List<int> RunMultipleTests(List<int> numbersOfThreads, int matrixRowCount, int matrixColumnCount, int matrixMinValue, int matrixMaxValue, SortingAlgorithmEnum algorithm)
+    public static List<long> RunMultipleTests(List<int> numbersOfThreads, int matrixRowCount, int matrixColumnCount, int matrixMinValue, int matrixMaxValue, SortingAlgorithmEnum algorithm)
     {
+        #region InputValidation
+
         if (numbersOfThreads == null)
         {
             throw new ArgumentNullException(nameof(numbersOfThreads));
@@ -79,7 +94,25 @@ public static class Benchmark
         {
             throw new ArgumentException("The minimum value cannot be greater than the maximum value.");
         }
+
+        #endregion
         
-        throw new NotImplementedException();
+        var stopwatch = new Stopwatch();
+        var results = new List<long>();
+        var matrix = Matrix.GenerateIntegerMatrix(matrixRowCount, matrixColumnCount, matrixMinValue, matrixMaxValue);
+
+        foreach (var numberOfThreads in numbersOfThreads)
+        {
+            var copyOfMatrix = Matrix.DeepCopyMatrix(matrix);
+            
+            stopwatch.Start();
+            MatrixRowSorting.ParallelSortMatrixRows(copyOfMatrix, numberOfThreads, algorithm);
+            stopwatch.Stop();
+            
+            results.Add(stopwatch.ElapsedMilliseconds);
+            stopwatch.Reset();
+        }
+        
+        return results;
     }
 }
