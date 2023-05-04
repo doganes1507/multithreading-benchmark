@@ -13,8 +13,25 @@ public static class Benchmark
     /// <param name="matrixMaxValue">The maximum value for the randomly generated matrix elements.</param>
     /// <param name="algorithm">The algorithm to use for sorting the matrix rows.</param>
     /// <returns>The elapsed time in milliseconds.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when numberOfThreads is less than 1 or greater than matrixRowCount.</exception>
+    /// <exception cref="ArgumentException">Thrown when matrixColumnCount is less than or equal to 0 or when matrixMinValue is greater than matrixMaxValue.</exception>
     public static int RunSingleTest(int numberOfThreads, int matrixRowCount, int matrixColumnCount, int matrixMinValue, int matrixMaxValue, SortingAlgorithmEnum algorithm)
     {
+        if (numberOfThreads < 1 || numberOfThreads > matrixRowCount)
+        {
+            throw new ArgumentOutOfRangeException(nameof(numberOfThreads), "The number of threads must be between 1 and the number of matrix rows.");
+        }
+
+        if (matrixColumnCount <= 0)
+        {
+            throw new ArgumentException("The matrix column count must be positive.");
+        }
+        
+        if (matrixMinValue > matrixMaxValue)
+        {
+            throw new ArgumentException("The minimum value cannot be greater than the maximum value.");
+        }
+        
         throw new NotImplementedException();
     }
 
@@ -30,8 +47,39 @@ public static class Benchmark
     /// <param name="matrixMaxValue">The maximum value for the randomly generated matrix elements.</param>
     /// <param name="algorithm">The algorithm to use for sorting the matrix rows.</param>
     /// <returns>List of time measurements in milliseconds for each test.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when the list of thread numbers is null.</exception>
+    ///  <exception cref="ArgumentException">Thrown when the list of thread numbers is empty or when the matrix column count is not positive or when the minimum value is greater than the maximum value.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when any of the numbers of threads is less than 1 or greater than the number of matrix rows.</exception>
     public static List<int> RunMultipleTests(List<int> numbersOfThreads, int matrixRowCount, int matrixColumnCount, int matrixMinValue, int matrixMaxValue, SortingAlgorithmEnum algorithm)
     {
+        if (numbersOfThreads == null)
+        {
+            throw new ArgumentNullException(nameof(numbersOfThreads));
+        }
+        
+        if (numbersOfThreads.Count == 0)
+        {
+            throw new ArgumentException("The list of thread numbers must contain at least one element.");
+        }
+        
+        foreach (var numberOfThreads in numbersOfThreads)
+        {
+            if (numberOfThreads < 1 || numberOfThreads > matrixRowCount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(numberOfThreads), "The number of threads must be between 1 and the number of matrix rows.");
+            }
+        }
+
+        if (matrixColumnCount <= 0)
+        {
+            throw new ArgumentException("The matrix column count must be positive.");
+        }
+        
+        if (matrixMinValue > matrixMaxValue)
+        {
+            throw new ArgumentException("The minimum value cannot be greater than the maximum value.");
+        }
+        
         throw new NotImplementedException();
     }
 }

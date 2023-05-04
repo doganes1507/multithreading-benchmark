@@ -12,8 +12,14 @@ public static class SortingAlgorithms
     /// <remarks>
     /// In the average case, the time complexity of the Bubble sort algorithm is O(n^2).
     /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown when the list is null.</exception>
     public static void BubbleSort<T>(List<T> list) where T: INumber<T>
     {
+        if (list == null)
+        {
+            throw new ArgumentNullException(nameof(list));
+        }
+        
         throw new NotImplementedException();
     }
     
@@ -25,8 +31,14 @@ public static class SortingAlgorithms
     /// <remarks>
     /// The time complexity of the Shell sort algorithm is estimated to be from O(n log n) to O(n^(3/2)).
     /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown when the list is null.</exception>
     public static void ShellSort<T>(List<T> list) where T : INumber<T>
     {
+        if (list == null)
+        {
+            throw new ArgumentNullException(nameof(list));
+        }
+        
         throw new NotImplementedException();
     }
 
@@ -38,8 +50,14 @@ public static class SortingAlgorithms
     /// <remarks>
     /// In the average case, the time complexity of the Quick sort algorithm is O(n log n).
     /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown when the list is null.</exception>
     public static void QuickSort<T>(List<T> list) where T : INumber<T>
     {
+        if (list == null)
+        {
+            throw new ArgumentNullException(nameof(list));
+        }
+        
         throw new NotImplementedException();
     }
 }
