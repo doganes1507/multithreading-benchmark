@@ -2,7 +2,7 @@
 
 namespace MultithreadingBenchmark.MatrixRowSorting;
 
-public static class MatrixRowSorting
+internal static class MatrixRowSorting
 {
     /// <summary>
     /// Sorts the rows of a matrix using parallelism and the specified sorting algorithm, dividing the work among the given number of threads.

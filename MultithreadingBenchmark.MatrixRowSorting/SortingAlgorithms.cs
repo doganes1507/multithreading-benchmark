@@ -2,7 +2,7 @@
 
 namespace MultithreadingBenchmark.MatrixRowSorting;
 
-public static class SortingAlgorithms
+internal static class SortingAlgorithms
 {
     /// <summary>
     /// Sorts the elements in the given list using the Bubble sort algorithm.

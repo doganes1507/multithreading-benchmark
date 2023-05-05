@@ -1,6 +1,6 @@
 ﻿namespace MultithreadingBenchmark.MatrixRowSorting;
 
-public static class Matrix
+internal static class Matrix
 {
     /// <summary>
     /// Generates a matrix of random integers.
