@@ -11,11 +11,11 @@ public static class MatrixRowSorting
     /// <param name="numberOfThreads">The number of threads to use for sorting.</param>
     /// <param name="algorithm">The algorithm to use for sorting the matrix rows.</param>
     /// <typeparam name="T">The type of elements in the matrix. Must implement the INumber interface.</typeparam>
-    /// <returns>The sorted matrix.</returns>
     /// <exception cref="ArgumentNullException">Thrown when the input matrix is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the input number of threads is less than 1, or greater than the number of matrix rows
     /// or when an unsupported SortingAlgorithmEnum value is passed in.</exception>
-    public static List<List<T>> ParallelSortMatrixRows<T>(List<List<T>> matrix, int numberOfThreads, SortingAlgorithmEnum algorithm) where T: INumber<T>
+    public static void ParallelSortMatrixRows<T>(List<List<T>> matrix, int numberOfThreads,
+        SortingAlgorithmEnum algorithm) where T: INumber<T>
     {
         #region InputValidation
 
@@ -65,6 +65,5 @@ public static class MatrixRowSorting
         }
 
         Task.WaitAll(tasks.ToArray());
-        return splitMatrix.SelectMany(part => part).ToList();
     }
 }

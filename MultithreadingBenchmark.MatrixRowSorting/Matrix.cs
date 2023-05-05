@@ -50,6 +50,7 @@ public static class Matrix
     /// <typeparam name="T">The type of the matrix elements.</typeparam>
     /// <returns>A new matrix that is a deep copy of the original matrix.</returns>
     /// <exception cref="ArgumentNullException">Thrown when the input matrix is null.</exception>
+    /// <remarks>The function does not copy the contents of each element in each row of the matrix if they are variables of reference type.</remarks>
     public static List<List<T>> DeepCopyMatrix<T>(List<List<T>> oldMatrix)
     {
         #region InputValidation
@@ -75,6 +76,8 @@ public static class Matrix
     /// <returns>A list of sub-matrices, each representing a part of the original matrix.</returns>
     /// <exception cref="ArgumentNullException">Thrown when the input list is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the number of parts is less than 1 or greater than the number of elements in the list.</exception>
+    /// <remarks>The function does not copy the contents of each element in the 'inputList' if they are variables of reference type.</remarks>
+
     public static List<List<T>> SplitList<T>(List<T> inputList, int numberOfParts)
     {
         #region InputValidation
