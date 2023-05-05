@@ -44,6 +44,14 @@ internal static class MatrixRowSorting
 
                 break;
                 
+            case SortingAlgorithmEnum.InsertionSort:
+                tasks.AddRange(splitMatrix.Select(part => Task.Run(() =>
+                {
+                    foreach (var row in part) SortingAlgorithms.InsertionSort(row);
+                })));
+
+                break;
+            
             case SortingAlgorithmEnum.ShellSort:
                 tasks.AddRange(splitMatrix.Select(part => Task.Run(() =>
                 {
@@ -51,15 +59,7 @@ internal static class MatrixRowSorting
                 })));
 
                 break;
-            
-            case SortingAlgorithmEnum.QuickSort:
-                tasks.AddRange(splitMatrix.Select(part => Task.Run(() =>
-                {
-                    foreach (var row in part) SortingAlgorithms.QuickSort(row);
-                })));
 
-                break;
-            
             default:
                 throw new ArgumentOutOfRangeException(nameof(algorithm), algorithm, null);
         }

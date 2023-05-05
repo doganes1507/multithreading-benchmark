@@ -3,6 +3,6 @@
 public enum SortingAlgorithmEnum
 {
     BubbleSort,
+    InsertionSort,
     ShellSort,
-    QuickSort
 }
