@@ -14,7 +14,7 @@ git clone https://github.com/doganes1507/multithreading-benchmark.git
 In the future, .exe files may be added to make it easier to download and use the application.
 
 ## Usage
-Currently, benchmarks can be interacted with using the console application. In the future, a graphical user interface (GUI) may be added to make interacting with the benchmarks easier.
+
 
 ## Contributing
 Contributions are welcome! If you'd like to contribute to multithreading-benchmark, feel free to open a pull request or issue on the GitHub repository.
