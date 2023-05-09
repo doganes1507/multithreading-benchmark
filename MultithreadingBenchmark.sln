@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultithreadingBenchmark.MatrixRowSorting", "MultithreadingBenchmark.MatrixRowSorting\MultithreadingBenchmark.MatrixRowSorting.csproj", "{D2DAEA6A-EF22-466B-8BA4-7796EF198A29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultithreadingBenchmark.FindPrimes", "MultithreadingBenchmark.FindPrimes\MultithreadingBenchmark.FindPrimes.csproj", "{482A1FFF-5475-4214-9226-4A0896E39DDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{D2DAEA6A-EF22-466B-8BA4-7796EF198A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2DAEA6A-EF22-466B-8BA4-7796EF198A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2DAEA6A-EF22-466B-8BA4-7796EF198A29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482A1FFF-5475-4214-9226-4A0896E39DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482A1FFF-5475-4214-9226-4A0896E39DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482A1FFF-5475-4214-9226-4A0896E39DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482A1FFF-5475-4214-9226-4A0896E39DDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
