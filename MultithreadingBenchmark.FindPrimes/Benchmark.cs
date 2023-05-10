@@ -1,4 +1,6 @@
-﻿namespace MultithreadingBenchmark.FindPrimes;
+﻿using System.Diagnostics;
+
+namespace MultithreadingBenchmark.FindPrimes;
 
 public static class Benchmark
 {
@@ -31,8 +33,14 @@ public static class Benchmark
         }
 
         #endregion
+
+        var stopwatch = new Stopwatch();
         
-        throw new NotImplementedException();
+        stopwatch.Start();
+        Primes.ParallelFindPrimes(numberOfThreads, startRange, endRange);
+        stopwatch.Stop();
+        
+        return stopwatch.ElapsedMilliseconds;
     }
 
     /// <summary>
@@ -78,7 +86,20 @@ public static class Benchmark
         }
 
         #endregion
+
+        var stopwatch = new Stopwatch();
+        var results = new List<long>();
         
-        throw new NotImplementedException();
+        foreach (var numberOfThreads in numbersOfThreads)
+        {
+            stopwatch.Start();
+            Primes.ParallelFindPrimes(numberOfThreads, startRange, endRange);
+            stopwatch.Stop();
+            
+            results.Add(stopwatch.ElapsedMilliseconds);
+            stopwatch.Reset();
+        }
+
+        return results;
     }
 }

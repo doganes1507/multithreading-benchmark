@@ -18,8 +18,20 @@ public static class Primes
         }
 
         #endregion
+
+        if (number == 2)
+            return true;
         
-        throw new NotImplementedException();
+        if (number % 2 == 0) 
+            return false;
+
+        for (var i = 3; i <= (int)Math.Sqrt(number); i += 2)
+        {
+            if (number % i == 0)
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -50,7 +62,23 @@ public static class Primes
         }
 
         #endregion
+
+        var tasks = new List<Task>();
+        var partSize = (int)Math.Ceiling((endRange - startRange + 1) / (double)numberOfThreads);
+
+        for (var i = 0; i < numberOfThreads; i++)
+        {
+            var i1 = i;
+            tasks.Add(Task.Run(() =>
+            {
+                for (var j = startRange + i1 * partSize; j < startRange + (i1 + 1) * partSize; j++)
+                {
+                    if (j <= endRange)
+                        IsPrime(j);
+                }
+            }));
+        }
         
-        throw new NotImplementedException();
+        Task.WaitAll(tasks.ToArray());
     }
 }
